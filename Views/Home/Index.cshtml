@@ -1,0 +1,71 @@
+﻿@model AddingRemovingRowInListJQuery.Models.Employee
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/Custom.js"></script>
+<link href="~/font-awesome/css/all.css" rel="stylesheet" />
+<script src="~/font-awesome/js/all.js"></script>
+<h4>Employee</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Index" class="form-inline">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group col-md-6">
+                <label asp-for="Id" class="control-label "></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            @for (int i = 0; i < Model.Subjects.Count; i++)
+            {
+                <div class="Subjects-parent-parent" style="width:100%">
+                    <h5 class="text-info">Subjects</h5>
+                    <div class="Subjects-parent w-100">
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label asp-for="Subjects[i].IsActive" class="control-label"></label>
+                                <input asp-for="Subjects[i].IsActive" class="form-control" />
+                                <span asp-validation-for="Subjects[i].IsActive" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label asp-for="Subjects[i].SubjectName" class="control-label"></label>
+                                <input asp-for="Subjects[i].SubjectName" class="form-control" />
+                                <span asp-validation-for="Subjects[i].SubjectName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label asp-for="Subjects[i].Standers" class="control-label"></label>
+                                <select asp-for="Subjects[i].SubjectName" class="form-control"></select>
+                                <span asp-validation-for="Subjects[i].Standers" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="javascript:void(0)" data-content="Subjects-parent" data-path="Subjects" class="plusBtn btn btn-outline-secondary">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="form-group col-md-12">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
